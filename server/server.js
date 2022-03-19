@@ -6,6 +6,7 @@ const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
 const { typeDefs, resolvers } = require('./schemas');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -37,4 +38,8 @@ db.once('open', () => {
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
 
   });
+});
+
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
 });
